@@ -15,7 +15,7 @@ namespace TokenService.Application.Handlers.Commands.Token.GenerateToken
                 throw new UnauthorizedAccessException("Invalid credentials");
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var secretKey = _configuration.GetValue<string>("Jwt:secretKey") ?? "";
+            var secretKey = _configuration.GetValue<string>("Jwt:Key") ?? "";
             var issuer = _configuration.GetValue<string>("Jwt:Issuer") ?? "";
             var audience = _configuration.GetValue<string>("Jwt:Audience") ?? "";
 
