@@ -28,10 +28,10 @@ Este enfoque permite separar la lógica de negocio del acceso a infraestructura 
 
 Cada microservicio está organizado en las siguientes capas:
 
--Api
--Application
--Domain
--Infrastructure
+- **Api**
+- **Application**
+- **Domain**
+- **Infrastructure**
 
 Responsabilidades:
 
@@ -52,17 +52,21 @@ Esta estructura permite:
 
 ### Arquitectura de servicios
 
-Client
-│
-▼
-BFF
-│
-├── UserService
-└── PhotoService
+Cliente
+   |
+   |-----> TokenService  (obtener JWT)
+   |
+   v
+BFF Service
+   |
+   |-----> UserService
+   |
+   |-----> PhotoService
 
 **TokenService** → Generación de JWT
 
-El cliente solo interactúa con el **BFF**, el cual se encarga de coordinar los demás servicios.
+El cliente interactúa con el **TokenService** para obtener un JWT y posteriormente
+consume el **BFF**, el cual se encarga de coordinar los microservicios internos.
 
 
 
@@ -99,12 +103,16 @@ Antes de ejecutar la solución es necesario:
 
 ### Cómo ejecutar la solución
 
-Ejecutar los servicios en el siguiente orden:
+1. Clonar el repositorio : git clone https://github.com/AndresEspinoza830/Caso_IBK.git
+2. Abrir cada microservicio en Visual Studio
 
-1. **UserService** -> dotnet run
-2. **PhotoService**  -> dotnet run
-3. **TokenService** -> dotnet run
-4. **BFF** -> dotnet run
+3. Ejecutar los servicios en el siguiente orden:
+
+- TokenService
+- UserService
+- PhotoService
+- BFFService
+
 
 
 ### Flujo de autenticación
@@ -178,7 +186,7 @@ Se realizaron pruebas sobre los handlers de la capa Application.
 
 ### Tecnologías utilizadas
 
-- .NET 6
+- .NET 8
 - ASP.NET Core Web API
 - MediatR
 - JWT Authentication
